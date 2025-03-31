@@ -462,6 +462,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -1.04, y: 237.338, z: -1.38}
+--- !u!1 &723335865 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7426394767665645665, guid: 0ab79d99759afac4ba56f761bd2ad699, type: 3}
+  m_PrefabInstance: {fileID: 1764379873}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &784454886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,6 +1433,7 @@ MonoBehaviour:
   phone: {fileID: 353106484}
   phoneViewPosition: {fileID: 500413683}
   phoneHiddenPosition: {fileID: 1239869805}
+  phoneUI: {fileID: 723335865}
   moveSpeed: 5
 --- !u!1001 &2041017829
 PrefabInstance:
