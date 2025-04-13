@@ -7,32 +7,52 @@ public class PhoneInteraction : MonoBehaviour
     public Transform phoneViewPosition;
     public Transform phoneHiddenPosition;
     public GameObject phoneUI; 
+    public CharacterController playerController;
+    public Transform playerCamera;
+    public MonoBehaviour cameraController;
+    
     public float moveSpeed = 5f;
     public float turnOnDelay = 1.5f;
+    public float phoneDistance = 0.4f;
+    
     private bool isPhoneOut = false;
 
     void Start()
     {
-        phoneUI.SetActive(false); // Ensure UI starts hidden
+        phoneUI.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     
     void Update()
     {
+        
+        // Adjust phoneViewPosition to match player's camera view
+        phoneViewPosition.position = playerCamera.position + playerCamera.forward * phoneDistance;
+        phoneViewPosition.rotation = playerCamera.rotation;
+        
         if (Input.GetKeyDown(KeyCode.E))  
         {
             isPhoneOut = !isPhoneOut;
-            Debug.Log("P was pressed! Phone Out: " + isPhoneOut);
             
             if (isPhoneOut)
             {
-                StartCoroutine(EnablePhoneUIWithDelay(0.5f)); // Enable UI with delay
+                StartCoroutine(EnablePhoneUIWithDelay(0.5f));
+                PausePlayerMovement(true);
+                PauseCameraRotation(true);
+            }
+            else
+            {
+                phoneUI.SetActive(false);
+                PausePlayerMovement(false);
+                PauseCameraRotation(false);
             }
         }
 
         // Move the phone smoothly between positions
         Transform targetPosition = isPhoneOut ? phoneViewPosition : phoneHiddenPosition;
-        phone.localPosition = Vector3.Lerp(phone.localPosition, targetPosition.localPosition, Time.deltaTime * moveSpeed);
-        phone.localRotation = Quaternion.Lerp(phone.localRotation, targetPosition.localRotation, Time.deltaTime * moveSpeed);
+        phone.position = Vector3.Lerp(phone.position, targetPosition.position, Time.deltaTime * moveSpeed);
+        phone.rotation = Quaternion.Lerp(phone.rotation, targetPosition.rotation, Time.deltaTime * moveSpeed);
 
         // Disable UI when phone is fully hidden
         if (!isPhoneOut && Vector3.Distance(phone.localPosition, phoneHiddenPosition.localPosition) < turnOnDelay)
@@ -45,5 +65,23 @@ public class PhoneInteraction : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         phoneUI.SetActive(true);
+    }
+    
+    void PausePlayerMovement(bool isPaused)
+    {
+        if (playerController != null)
+        {
+            playerController.enabled = !isPaused;
+        }
+        Cursor.visible = isPaused;
+        Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+    
+    void PauseCameraRotation(bool isPaused)
+    {
+        if (cameraController != null)
+        {
+            cameraController.enabled = !isPaused;
+        }
     }
 }
