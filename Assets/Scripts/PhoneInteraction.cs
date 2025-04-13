@@ -29,7 +29,8 @@ public class PhoneInteraction : MonoBehaviour
         
         // Adjust phoneViewPosition to match player's camera view
         phoneViewPosition.position = playerCamera.position + playerCamera.forward * phoneDistance;
-        phoneViewPosition.rotation = playerCamera.rotation;
+        phoneViewPosition.rotation = playerCamera.rotation * Quaternion.Euler(0, -90, 0);
+
         
         if (Input.GetKeyDown(KeyCode.E))  
         {
