@@ -10,28 +10,38 @@ public class MenuController : MonoBehaviour
     
     public List<GameObject> menuObjects;
     private bool isMenuOpen = false;
+    public GameObject Menu;
     private GameObject Messenger;
     private GameObject Camera;
     private GameObject Gallery;
     private GameObject Map;
-    private GameObject Menu;
+    private GameObject Bank;
+    private GameObject Notes;
+    private GameObject Phone;
+    private GameObject Spotify;
+    private GameObject Tinder;
 
 
     void Start()
     {
-        if (menuObjects.Count == 5)
+        if (menuObjects.Count == 9)
         {
-            Messenger = menuObjects[0];
+            Bank = menuObjects[0];
             Camera = menuObjects[1];
             Gallery = menuObjects[2];
             Map = menuObjects[3];
-            Menu = menuObjects[4];
+            Messenger = menuObjects[4];
+            Notes = menuObjects[5];
+            Phone = menuObjects[6];
+            Spotify = menuObjects[7];
+            Tinder = menuObjects[8];
             
         }
     }
 
     private void ToggleMenu(GameObject menuToActivate)
     {
+
         foreach (GameObject menuObject in menuObjects)
         {
             if (menuObject != null)
@@ -47,39 +57,33 @@ public class MenuController : MonoBehaviour
         if (menuToActivate != null)
         {
             menuToActivate.SetActive(true);
+            Menu.SetActive(false);
         }
         else
         {
             Debug.LogError("menuToActivate is null!");
         }
+        
     }
-
-    public void OpenMessenger()
+    
+    public void OpenBank()
     {
         isMenuOpen = !isMenuOpen;
         if (isMenuOpen)
         {
-            Debug.Log("Opening Messenger");
-            ToggleMenu(Messenger);  // Only activate the Messenger
+            ToggleMenu(Bank);  
         }
-        else
-        {
-            Debug.Log("Closing Messenger, opening Menu");
-            ToggleMenu(Menu); // Activate the main menu when closing
-        }
+        
     }
-
+    
     public void OpenCamera()
     {
         isMenuOpen = !isMenuOpen;
         if (isMenuOpen)
         {
-            ToggleMenu(Camera);  // Only activate the Camera
+            ToggleMenu(Camera);
         }
-        else
-        {
-            ToggleMenu(Menu); // Activate the main menu when closing
-        }
+        
     }
     
     public void OpenGallery()
@@ -87,39 +91,69 @@ public class MenuController : MonoBehaviour
         isMenuOpen = !isMenuOpen;
         if (isMenuOpen)
         {
-            ToggleMenu(Gallery);  // Only activate the Camera
+            ToggleMenu(Gallery); 
         }
-        else
-        {
-            ToggleMenu(Menu); // Activate the main menu when closing
-        }
+        
     }
 
-    public void OpenMap()
+    public void OpenMaps()
     {
         isMenuOpen = !isMenuOpen;
         if (isMenuOpen)
         {
-            ToggleMenu(Map);  // Only activate the Map
+            ToggleMenu(Map);  
         }
-        else
-        {
-            ToggleMenu(Menu); // Activate the main menu when closing
-        }
+        
     }
-
-    public void OpenMenu()
+    
+    public void OpenMessenger()
     {
         isMenuOpen = !isMenuOpen;
         if (isMenuOpen)
         {
-            Debug.Log("Opening Menu: ");
-            ToggleMenu(Menu);  // Only activate the Main Menu
+            Debug.Log("Opening Messenger");
+            ToggleMenu(Messenger); 
         }
-        else
+       
+    }
+
+    public void OpenNotes()
+    {
+        isMenuOpen = !isMenuOpen;
+        if (isMenuOpen)
         {
-            Debug.Log("Closing Menu");
-            ToggleMenu(null);  // Optionally handle menu closing behavior
+            ToggleMenu(Notes);  
         }
+        
+    }
+    
+    public void OpenPhone()
+    {
+        isMenuOpen = !isMenuOpen;
+        if (isMenuOpen)
+        {
+            ToggleMenu(Phone); 
+        }
+        
+    }
+    
+    public void OpenSpotify()
+    {
+        isMenuOpen = !isMenuOpen;
+        if (isMenuOpen)
+        {
+            ToggleMenu(Spotify); 
+        }
+        
+    }
+
+    public void OpenTinder()
+    {
+        isMenuOpen = !isMenuOpen;
+        if (isMenuOpen)
+        {
+            ToggleMenu(Tinder);  
+        }
+        
     }
 }
