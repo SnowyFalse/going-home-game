@@ -35,7 +35,6 @@ public class MenuController : MonoBehaviour
             Phone = menuObjects[6];
             Spotify = menuObjects[7];
             Tinder = menuObjects[8];
-            
         }
     }
 
@@ -53,9 +52,10 @@ public class MenuController : MonoBehaviour
                 Debug.LogWarning("A menu object is null and cannot be deactivated.");
             }
         }
-        
+
         if (menuToActivate != null)
         {
+
             menuToActivate.SetActive(true);
             Menu.SetActive(false);
         }
@@ -68,92 +68,75 @@ public class MenuController : MonoBehaviour
     
     public void OpenBank()
     {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen)
-        {
-            ToggleMenu(Bank);  
-        }
-        
+        ToggleMenu(Bank);  
+        isMenuOpen = false;
     }
     
     public void OpenCamera()
     {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen)
-        {
-            ToggleMenu(Camera);
-        }
+        ToggleMenu(Camera);  
+        isMenuOpen = false;
         
     }
     
     public void OpenGallery()
     {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen)
-        {
-            ToggleMenu(Gallery); 
-        }
+        ToggleMenu(Gallery);  
+        isMenuOpen = false;
         
     }
 
     public void OpenMaps()
     {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen)
-        {
-            ToggleMenu(Map);  
-        }
-        
+        ToggleMenu(Map);  
+        isMenuOpen = false;
     }
     
     public void OpenMessenger()
     {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen)
-        {
-            Debug.Log("Opening Messenger");
-            ToggleMenu(Messenger); 
-        }
-       
+        ToggleMenu(Messenger);  
+        isMenuOpen = false;
     }
 
     public void OpenNotes()
     {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen)
-        {
-            ToggleMenu(Notes);  
-        }
-        
+        ToggleMenu(Notes);  
+        isMenuOpen = false;
     }
     
     public void OpenPhone()
     {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen)
-        {
-            ToggleMenu(Phone); 
-        }
-        
+        ToggleMenu(Phone);  
+        isMenuOpen = false;
     }
     
     public void OpenSpotify()
     {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen)
-        {
-            ToggleMenu(Spotify); 
-        }
-        
+        ToggleMenu(Spotify);  
+        isMenuOpen = false;
     }
 
     public void OpenTinder()
     {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen)
+        ToggleMenu(Tinder);  
+        isMenuOpen = false;
+    }
+
+    public void BackToMenu()
+    {
+        foreach (GameObject menuObject in menuObjects)
         {
-            ToggleMenu(Tinder);  
+            if (menuObject != null)
+            {
+                menuObject.SetActive(false);
+            }
+            else
+            {
+                Debug.LogWarning("A menu object is null and cannot be deactivated.");
+            }
         }
-        
+
+        isMenuOpen = true;
+        Menu.SetActive(true);
     }
 }
